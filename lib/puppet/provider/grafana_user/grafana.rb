@@ -203,7 +203,7 @@ Puppet::Type.type(:grafana_user).provide(:grafana, parent: Puppet::Provider::Gra
   end
 
   def check_password
-    uri = URI.parse format('%s://%s:%d%s/dashboards/home', grafana_scheme, grafana_host, grafana_port, resource[:grafana_api_path])
+    uri = URI.parse format('%s://%s:%d%s/user', grafana_scheme, grafana_host, grafana_port, resource[:grafana_api_path])
     request = Net::HTTP::Get.new(uri.to_s)
     request.content_type = 'application/json'
     request.basic_auth resource[:name], resource[:password]
